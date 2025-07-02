@@ -3,6 +3,7 @@ import Navbar from './Components/Navbar'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './Pages/Home'
 import Footer from './Components/Footer'
+import CarDetails from './Pages/CarDetails'
 
 
 
@@ -16,6 +17,7 @@ const App = () => {
 
      <Routes>
       <Route path='/' element={<Home/>}/>
+      <Route path='/car-details/:id' element={<CarDetails/>}/>
      </Routes>
 
      {!isOwnerPath && <Footer/>}
