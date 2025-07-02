@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Navbar from './Components/Navbar'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './Pages/Home'
+import Footer from './Components/Footer'
+
 
 
 const App = () => {
@@ -15,6 +17,8 @@ const App = () => {
      <Routes>
       <Route path='/' element={<Home/>}/>
      </Routes>
+
+     {!isOwnerPath && <Footer/>}
     </>
   )
 }
