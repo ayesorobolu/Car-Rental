@@ -10,7 +10,7 @@ const Navbar = ({setShowLogin}) => {
     
   return (
     <div className={`flex items-center justify-between px-6 md:px-16 lg:px-24
-    xl:px-32 py-4 text-gray-600 border-b border-[va(--color-borderColor)] relative transition-all
+    xl:px-32 py-4 text-gray-600 border-b border-[var(--color-borderColor)] relative transition-all
     ${location.pathname === '/' && "bg-[var(--color-light)]"}`}>
 
      <Link to="/">
