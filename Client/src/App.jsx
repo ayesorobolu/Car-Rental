@@ -6,6 +6,7 @@ import Footer from './Components/Footer'
 import CarDetails from './Pages/CarDetails'
 import Cars from './Pages/Cars'
 import MyBookings from './Pages/MyBookings'
+import Layout from './Pages/Owner/Layout'
 
 
 
@@ -23,6 +24,10 @@ const App = () => {
       <Route path='/cars' element={<Cars/>}/>
       <Route path='/my-bookings' element={<MyBookings/>}/>
      </Routes>
+
+     <Route path='/owner' element={<Layout/>}>
+
+     </Route>
 
      {!isOwnerPath && <Footer/>}
     </>
