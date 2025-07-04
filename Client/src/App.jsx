@@ -9,6 +9,7 @@ import MyBookings from './Pages/MyBookings'
 import Layout from './Pages/Owner/Layout'
 import Dashboard from './Pages/Owner/Dashboard'
 import AddCar from './Pages/Owner/AddCar'
+import ManageCars from './Pages/Owner/ManageCars'
 
 
 
@@ -29,6 +30,7 @@ const App = () => {
       <Route path='/owner' element={<Layout/>}>
         <Route index element={<Dashboard/>}/>
         <Route path='add-car' element={<AddCar/>}/>
+        <Route path='manage-cars' element={<ManageCars/>}/>
      </Route>
      </Routes>    
 
