@@ -23,11 +23,11 @@ const App = () => {
       <Route path='/car-details/:id' element={<CarDetails/>}/>
       <Route path='/cars' element={<Cars/>}/>
       <Route path='/my-bookings' element={<MyBookings/>}/>
-     </Routes>
 
-     <Route path='/owner' element={<Layout/>}>
+      <Route path='/owner' element={<Layout/>}>
 
      </Route>
+     </Routes>    
 
      {!isOwnerPath && <Footer/>}
     </>
