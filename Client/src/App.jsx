@@ -7,6 +7,7 @@ import CarDetails from './Pages/CarDetails'
 import Cars from './Pages/Cars'
 import MyBookings from './Pages/MyBookings'
 import Layout from './Pages/Owner/Layout'
+import Dashboard from './Pages/Owner/Dashboard'
 
 
 
@@ -25,7 +26,7 @@ const App = () => {
       <Route path='/my-bookings' element={<MyBookings/>}/>
 
       <Route path='/owner' element={<Layout/>}>
-
+        <Route index element={<Dashboard/>}/>
      </Route>
      </Routes>    
 
