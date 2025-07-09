@@ -1,6 +1,6 @@
 import express from "express";
-import { protect } from "../middleware/auth";
-import { changeRoleToOwner } from "../controllers/ownerController";
+import { protect } from "../middleware/auth.js";
+import { changeRoleToOwner } from "../controllers/ownerController.js";
 
 const ownerRouter  = express.Router();
 
