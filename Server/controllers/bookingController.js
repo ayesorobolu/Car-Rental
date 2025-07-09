@@ -2,7 +2,7 @@ import Booking from "../models/Booking.js"
 import Car from "../models/Car.js";
 
 //Function to check availability of Car for a given date
-export const checkAvailalbility =  async (car, pickupDate, returnDate) => {
+export const checkAvailability =  async (car, pickupDate, returnDate) => {
 const bookings = await Booking.find({
     car,
     pickupDate: {$lte: returnDate},
@@ -11,8 +11,8 @@ const bookings = await Booking.find({
 return bookings.length === 0;
 }
 
-//API to check AVilability of Cars for the given date and location
-export const checkAvailalbilityofCar = async (req, res) =>{
+//API to check AVailability of Cars for the given date and location
+export const checkAvailabilityofCar = async (req, res) =>{
     try {
         const {location, pickupDate, returnDate} = req.body
         
@@ -21,7 +21,7 @@ export const checkAvailalbilityofCar = async (req, res) =>{
 
         //check car availability for the given date range using promise
         const availableCarsPromises =  cars.map(async (car) => {
-            await checkAvailalbility(Car._id, pickupDate, returnDate)
+            await checkAvailability(Car._id, pickupDate, returnDate)
             return{...car._doc, isAvailable: isAvailable}
         })
 
@@ -41,7 +41,7 @@ export const createBooking = async (req, res) =>{
         const {_id} = req.user;
         const{car, pickupDate, returnDate} = req.body;
 
-        const isAvailable = await checkAvailalbility(car, pickupDate, returnDate)
+        const isAvailable = await checkAvailability(car, pickupDate, returnDate)
         if(isAvailable){
             return res.json({success: false, message:"Car is not available"})
         }
@@ -57,6 +57,18 @@ export const createBooking = async (req, res) =>{
         await Booking.create({car, owner: carData.owner, user: _id, pickupDate, returnDate, price})
 
         res.json({success: true, message: "Booking Created"})
+    } catch (error) {
+        console.log(error.message);
+        res.json({success: false, message: error.message})
+    }
+}
+
+//API to list User booking
+export const getUserBookings =  async (req,res) => {
+    try {
+        const {_id} = req.user;""
+        const bookings = await Booking.find({user: _id}).populate("car").sort({createdAt: -1})
+        res.json({success: true, bookings})
     } catch (error) {
         console.log(error.message);
         res.json({success: false, message: error.message})
