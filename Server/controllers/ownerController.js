@@ -1,7 +1,7 @@
-import ImageKit from "imagekit";
 import User from "../models/User.js";
 import fs from "fs"
 import Car from "../models/Car.js";
+import imagekit from "../configs/imageKit.js";
 
 //API to change role of user
 export const changeRoleToOwner = async (req, res) => {
@@ -24,11 +24,11 @@ export const addCar =  async (req,res) => {
 
        //Upload Image to ImageKit
        const fileBuffer = fs.readFileSync(imageFile.path)
-       const response = await ImageKit.upload({
-        fifle: fileBuffer,
-        filename: imageFile.originalname,
+       const response = await imagekit.upload({
+        file: fileBuffer,
+        fileName: imageFile.originalname,
         folder: '/cars'
-       })
+      })
 
        // optimization through imagekit URL transformation
        var optimizedImageUrl = imagekit.url({
