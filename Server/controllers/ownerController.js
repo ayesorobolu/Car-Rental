@@ -50,6 +50,18 @@ export const addCar =  async (req,res) => {
     }
 } 
 
+//API to list Owner Car
+export const getOwnerCars = async (req,res) =>{
+    try {
+        const {_id} = req.user;
+        const cars = await Car.find({owner: _id})
+        res.json({success: true, cars})
+    } catch (error) {
+        console.log(error.message); b 
+        res.json({success: false, message: error.message}) 
+    }
+}
+
 //API to toggle Car Availability
 export const toggleCarAvailability = async (req,res) => {
     try {
