@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import { assets, menuLinks} from '../assets/assets';
 import {Link, useLocation, useNavigate} from 'react-router-dom'
-import { UseAppContext } from '../context/AppContext';
+import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
 
 const Navbar = () => {
 
-    const {setShowLogin, user, logout, isOwner, axios, setIsOwner} = UseAppContext()  
+    const {setShowLogin, user, logout, isOwner, axios, setIsOwner} = useAppContext()  
 
     const location = useLocation()
     const [open, setOpen] = useState(false)
