@@ -28,7 +28,7 @@ const Dashboard = () => {
         try {
             const { data } = await axios.get('/api/owner/dashboard')
             if(data.success){
-                setData(data.dashboard.Data)
+                setData(data.dashboardData)
             } else{
                 toast.error(data.message)
             }
