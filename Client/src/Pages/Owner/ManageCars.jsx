@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { assets } from '../../assets/assets'
 import Title from '../../Components/Owner/Title'
 import { useAppContext } from '../../context/AppContext'
+import toast from 'react-hot-toast'
 
 const ManageCars = () => {
 
@@ -20,6 +21,39 @@ const ManageCars = () => {
         toast.error(error.message)
        }
     }
+
+    const toggleAvailability = async (carId) => {
+        try {
+         const { data } = await axios.post('/api/owner/toggle-car', {carId}) 
+         if(data.success){
+             toast.success(data.message)
+             fetchOwnerCars()
+         }else{
+             toast.error(data.message)
+         }
+        } catch (error) {
+         toast.error(error.message)
+        }
+     }
+
+     const deleteCar = async (carId) => {
+        try {
+
+         const confirm = window.confirm('Are you sue you want to delete this car?')   
+
+         if(!confirm) return null
+
+         const { data } = await axios.post('/api/owner/delete-car', {carId}) 
+         if(data.success){
+            toast.success(data.message)
+            fetchOwnerCars()
+         }else{
+             toast.error(data.message)
+         }
+        } catch (error) {
+         toast.error(error.message)
+        }
+     }
 
     useEffect(()=> {
         isOwner && fetchOwnerCars()
@@ -63,8 +97,9 @@ const ManageCars = () => {
                             </td>
 
                             <td className='flex items-center p-3'>
-                                <img src={car.isAvaliable ? assets.eye_close_icon : assets.eye_icon} alt="" className='cursor-pointer' />
-                                <img src={assets.delete_icon} alt="" className='cursor-pointer' />
+                                <img src={car.isAvaliable ? assets.eye_close_icon : assets.eye_icon} alt="" className='cursor-pointer' onClick={() => toggleAvailability(car._id)}/>
+
+                                <img src={assets.delete_icon} alt="" className='cursor-pointer' onClick={() => deleteCar(car._id)} />
                             </td>
                         </tr>
                     ))}
