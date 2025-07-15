@@ -9,7 +9,7 @@ export const changeRoleToOwner = async (req, res) => {
     try {
         const {_id} = req.user;
         await User.findByIdAndUpdate(_id, {role:"owner"})
-        res.json({succes:true, message: "Now you can list cars"})
+        res.json({success:true, message: "Now you can list cars"})
     } catch (error) {
         console.log(error.message);
         res.json({success: false, message: error.message})
@@ -43,7 +43,7 @@ export const addCar =  async (req,res) => {
 
        const image = optimizedImageUrl;
       const cars = await Car.create({...car, owner: _id, image})
-       res.json({succes: true, cars})
+       res.json({success: true, cars})
 
     } catch (error) {
         console.log(error.message); b 
@@ -171,7 +171,7 @@ export const updateUserImage = async (req, res) => {
            const image = optimizedImageUrl;
 
            await User.findByIdAndUpdate(_id, {image});
-           res.json({succes: true, message:"Image Updated"})
+           res.json({success: true, message:"Image Updated"})
 
     } catch (error) {
         console.log(error.message);
