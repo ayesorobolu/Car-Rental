@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { assets, dummyCarData } from '../../assets/assets'
+import { assets } from '../../assets/assets'
 import Title from '../../Components/Owner/Title'
+import { useAppContext } from '../../context/AppContext'
 
 const ManageCars = () => {
 
-    const currency = import.meta.env.VITE_CURRENCY
+    const {currency, isOwner, axios} = useAppContext()
     const [cars, setCars] = useState([])
 
     const fetchOwnerCars = async () => {
-        setCars(dummyCarData)
+       try {
+        const { data } = await axios.get('/api/owner/cars') 
+        if(data.success){
+            setCars(data.cars)
+        }else{
+            toast.error(data.message)
+        }
+       } catch (error) {
+        toast.error(error.message)
+       }
     }
 
     useEffect(()=> {
-        fetchOwnerCars()
-    },[])
+        isOwner && fetchOwnerCars()
+    },[isOwner])
 
   return (
     <div className='px-4 pt-10 md:px-19 w-full'>
